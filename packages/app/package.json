@@ -6,7 +6,7 @@
 		"node": ">=16.0.0"
 	},
 	"scripts": {
-		"dev": "vite dev",
+		"dev": "vite dev --host 0.0.0.0 --https",
 		"build": "vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -36,9 +36,11 @@
 	},
 	"dependencies": {
 		"@picocss/pico": "^1.5.7",
+		"@vitejs/plugin-basic-ssl": "^1.0.1",
 		"@wagmi/core": "0.10.1",
 		"@web3modal/ethereum": "^2.2.0",
 		"@web3modal/html": "^2.2.0",
-		"ethers": "^5.7.2"
+		"ethers": "^5.7.2",
+		"svelte-loading-spinners": "^0.3.4"
 	}
 }

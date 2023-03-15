@@ -1,6 +1,6 @@
 <script>
-  import ContractInteraction from "../components/ContractInteraction.svelte";
+  import NFCInteraction from "../components/NFCInteraction.svelte";
 </script>
 
 <h3>The home page</h3>
-<ContractInteraction />
+<NFCInteraction />
