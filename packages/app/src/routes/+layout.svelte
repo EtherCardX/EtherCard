@@ -42,21 +42,16 @@
 <header>
   <header-wrapper>
     LOGO
-    <!-- <img src={logo} alt="logo" /> -->
     <w3m-wrapper>
       <w3m-network-switch style="position: relative; right: 0px" />
       <w3m-core-button balance="hide" icon="hide" />
     </w3m-wrapper>
   </header-wrapper>
-  <!-- </nav> -->
 </header>
 
-<!-- Main -->
 <main>
   <slot />
 </main>
-
-<!-- Footer -->
 
 <footer><BottomNav /></footer>
 
@@ -86,6 +81,7 @@
     gap: 8px;
   }
   footer {
+    height: auto;
     width: 100%;
     position: fixed;
     bottom: 0px;
