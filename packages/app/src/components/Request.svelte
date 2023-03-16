@@ -13,14 +13,13 @@
   import { foundry } from "@wagmi/core/chains";
   import { onMount } from "svelte";
   import { ethers, Wallet, type BigNumber } from "ethers";
-  import { formatEther } from "ethers/lib/utils.js";
-  import { Jumper } from "svelte-loading-spinners";
+  import { formatEther, parseEther } from "ethers/lib/utils.js";
   import UserBalanceDisplay from "./Display/UserBalanceDisplay.svelte";
   import RequestInput from "./Input/RequestInput.svelte";
   import RequestButton from "./Button/RequestButton.svelte";
   import TransactionLine from "./Transaction/TransactionLine.svelte";
-  import { amount, scanStatus } from "../stores/stores";
-  import { userETH } from "../stores/stores";
+  import { amount, scanStatus } from "../stores";
+  import { userETH, transactions } from "../stores";
 
   import kaching from "../audio/kaching.mp3";
   // variables
@@ -28,12 +27,12 @@
   let receiverETH: string;
   let inputAmount: number = 0;
   let audio: any;
-
-  let items: Array<{ txHash: string; amount: string }> = [
-    { txHash: "0x0", amount: "0" },
-    { txHash: "0x0", amount: "0" },
-    { txHash: "0x0", amount: "0" },
-  ];
+  let items: Array<{ timestamp: string; amount: BigNumber }>;
+  // let items: Array<{ timestamp: string; amount: BigNumber }> = [
+  //   { timestamp: "1678953370", amount: parseEther("0.1") },
+  //   { timestamp: "1678943370", amount: parseEther("0.1") },
+  //   { timestamp: "1678933370", amount: parseEther("0.1") },
+  // ];
 
   const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 
@@ -61,6 +60,10 @@
       // If scanning is false, then we want to stop scanning
       // await updateTransactionList();
     }
+  });
+
+  transactions.subscribe((value) => {
+    items = value;
   });
 
   // Get
@@ -116,6 +119,15 @@
         await tx.wait();
         receiverETH = formatEther((await fetchBalance({ address: receiverAddress })).value);
         scanStatus.set("normal");
+        transactions.update((items) => {
+          return [
+            {
+              timestamp: Date.now().toString(),
+              amount: parseEther(inputAmount.toString()),
+            },
+            ...items,
+          ];
+        });
         audio.play();
       } catch (error) {
         console.log("tx error: ", error);
@@ -137,7 +149,7 @@
     <transaction-container>
       {#each items as item}
         <!-- content here -->
-        <TransactionLine />
+        <TransactionLine amount={item.amount} timestamp={item.timestamp} />
       {/each}
     </transaction-container>
   </container>

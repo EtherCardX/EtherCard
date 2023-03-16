@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { amount } from "../../stores/stores";
+  import { amount } from "../../stores";
 
   let _amount = "";
   function handleInput(event: any) {

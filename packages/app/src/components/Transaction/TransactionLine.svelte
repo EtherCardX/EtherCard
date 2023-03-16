@@ -1,7 +1,24 @@
 <script lang="ts">
+  import type { BigNumber } from "ethers";
   import caretIcon from "../../images/caret-down.svg";
   import doubleCheck from "../../images/double-check.svg";
   // your script goes here
+  import { formatEther, parseEther } from "ethers/lib/utils.js";
+
+  export let amount: BigNumber;
+  export let timestamp: string;
+
+  // Convert amount to string with 5 decimal place
+  let displayAmount = formatEther(amount);
+
+  // Convert timestamp to HH:MM
+  let displayTimestamp = new Date(Number(timestamp) * 1000);
+  let _displayTimestamp = displayTimestamp
+    .toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+    })
+    .toString();
 </script>
 
 <!-- <section>Transaction Line</section> -->
@@ -12,10 +29,10 @@
     <received_marker>Received </received_marker>
   </transaction-header>
   <transaction-body>
-    <transaction-value>0.03 ETH</transaction-value>
+    <transaction-value>{displayAmount} ETH</transaction-value>
     <transaction-timestamp-container>
       <img src={doubleCheck} alt="checks" />
-      <transaction-timestamp>12:00</transaction-timestamp>
+      <transaction-timestamp>{_displayTimestamp}</transaction-timestamp>
     </transaction-timestamp-container>
   </transaction-body>
 </container>

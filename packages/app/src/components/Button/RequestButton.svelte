@@ -5,7 +5,7 @@
 
   let buttonState: "normal" | "scanning" | "success" = "normal";
 
-  import { scanStatus } from "../../stores/stores";
+  import { scanStatus } from "../../stores";
 
   scanStatus.subscribe((value) => {
     // @ts-ignore
