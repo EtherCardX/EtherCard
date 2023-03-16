@@ -116,34 +116,22 @@
         <TransactionLine />
       {/each}
     </transaction-container>
-
-    <!-- <div style="text-align: center">Send 1 ETH</div>
-    <input
-      type="text"
-      bind:value={inputMessage}
-      placeholder="Enter message to send to contract"
-      style="width: 100%"
-    /> -->
-    <!-- <button on:click={sendMessageToContract}> Send</button> -->
-    <!-- <div style="text-align: center">Message from contract: {messageFromContract}</div> -->
   </container>
-  <!-- Current ETH: {receiverETH}
-  <div style="text-align: center">Request 1 ETH</div>
-  {#if isScanning}
-    <Jumper color={spinnerColour} />
-  {/if}
-  <button on:click={requestPayment}> Request</button>
-  walletAddress: {senderAddress} -->
 </section>
 
 <style>
+  section {
+    height: 100%;
+  }
+
   /* Auto layout */
   container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 24px 17px 191px;
+    padding: 16px 16px;
     gap: 24px;
+    height: 100vh;
   }
   transaction-container {
     /* Transaction Container */
