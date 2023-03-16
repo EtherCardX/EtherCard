@@ -35,16 +35,14 @@
   ];
 
   formatEther;
+  const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 
   onMount(async () => {
-    console.log("onMountt");
-    const { address: receiverAddress } = getAccount();
+    let { address: receiverAddress } = getAccount();
+    receiverAddress = receiverAddress ? receiverAddress : ZERO_ADDRESS;
     console.log("🚀 | onMount | receiverAddress: ", receiverAddress);
-    senderAddress = receiverAddress ? receiverAddress : `0x${"0".repeat(40)}`;
-    receiverETH = formatEther((await fetchBalance({ address: senderAddress })).value);
-    senderETH = formatEther(
-      (await fetchBalance({ address: receiverAddress ? receiverAddress : senderAddress })).value
-    );
+    receiverETH = formatEther((await fetchBalance({ address: receiverAddress })).value);
+    console.log("🚀 | onMount | receiverETH:", receiverETH);
   });
 
   function loadWallet(pk: string): Wallet {
@@ -109,7 +107,7 @@
 
 <section>
   <container>
-    <UserBalanceDisplay />
+    <UserBalanceDisplay amount={receiverETH} />
     <RequestInput />
     <RequestButton />
     <transaction-container>
