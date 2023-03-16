@@ -15,6 +15,10 @@
   import { ethers, Wallet, type BigNumber } from "ethers";
   import { formatEther } from "ethers/lib/utils.js";
   import { Jumper } from "svelte-loading-spinners";
+  import UserBalanceDisplay from "./Display/UserBalanceDisplay.svelte";
+  import RequestInput from "./Input/RequestInput.svelte";
+  import RequestButton from "./Button/RequestButton.svelte";
+  import TransactionLine from "./Transaction/TransactionLine.svelte";
 
   // variables
   let inputMessage = "";
@@ -24,6 +28,11 @@
   let senderETH: string;
   let isScanning: boolean = false;
   let spinnerColour: string = "#FF0000";
+  let items: Array<{ txHash: string; amount: string }> = [
+    { txHash: "0x0", amount: "0" },
+    { txHash: "0x0", amount: "0" },
+    { txHash: "0x0", amount: "0" },
+  ];
 
   formatEther;
 
@@ -98,13 +107,56 @@
   }
 </script>
 
-<section>NFC</section>
 <section>
-  Current ETH: {receiverETH}
+  <container>
+    <UserBalanceDisplay />
+    <RequestInput />
+    <RequestButton />
+    <transaction-container>
+      {#each items as item}
+        <!-- content here -->
+        <TransactionLine />
+      {/each}
+    </transaction-container>
+
+    <!-- <div style="text-align: center">Send 1 ETH</div>
+    <input
+      type="text"
+      bind:value={inputMessage}
+      placeholder="Enter message to send to contract"
+      style="width: 100%"
+    /> -->
+    <!-- <button on:click={sendMessageToContract}> Send</button> -->
+    <!-- <div style="text-align: center">Message from contract: {messageFromContract}</div> -->
+  </container>
+  <!-- Current ETH: {receiverETH}
   <div style="text-align: center">Request 1 ETH</div>
   {#if isScanning}
     <Jumper color={spinnerColour} />
   {/if}
   <button on:click={requestPayment}> Request</button>
-  walletAddress: {senderAddress}
+  walletAddress: {senderAddress} -->
 </section>
+
+<style>
+  /* Auto layout */
+  container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 17px 191px;
+    gap: 24px;
+  }
+  transaction-container {
+    /* Transaction Container */
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0px;
+
+    width: 100%;
+  }
+</style>

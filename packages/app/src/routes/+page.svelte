@@ -1,6 +1,7 @@
 <script>
-  import NFCInteraction from "../components/NFCInteraction.svelte";
+  import Request from "../components/Request.svelte";
 </script>
 
-<h3>The home page</h3>
-<NFCInteraction />
+<section>
+  <Request />
+</section>
