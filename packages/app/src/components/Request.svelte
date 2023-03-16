@@ -22,14 +22,12 @@
   import { amount, scanStatus } from "../stores/stores";
   import { userETH } from "../stores/stores";
 
+  import kaching from "../audio/kaching.mp3";
   // variables
-  let senderAddress: `0x${string}`;
   let receiverAddress: `0x${string}`;
   let receiverETH: string;
-  let senderETH: string;
-  let isScanning: boolean = false;
-  let spinnerColour: string = "#FF0000";
   let inputAmount: number = 0;
+  let audio: any;
 
   let items: Array<{ txHash: string; amount: string }> = [
     { txHash: "0x0", amount: "0" },
@@ -118,7 +116,7 @@
         await tx.wait();
         receiverETH = formatEther((await fetchBalance({ address: receiverAddress })).value);
         scanStatus.set("normal");
-        console.log(tx);
+        audio.play();
       } catch (error) {
         console.log("tx error: ", error);
       }
@@ -127,6 +125,8 @@
     }
   }
 </script>
+
+<audio src={kaching} bind:this={audio} />
 
 <section>
   <container>
