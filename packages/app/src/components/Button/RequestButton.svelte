@@ -3,26 +3,22 @@
 
   import { onMount } from "svelte";
 
-  let buttonState: "normal" | "loading" | "transaction_received" = "normal";
+  let buttonState: "normal" | "scanning" | "success" = "normal";
+
+  import { scanStatus } from "../../stores/stores";
+
+  scanStatus.subscribe((value) => {
+    // @ts-ignore
+    buttonState = value;
+  });
 
   function handleClick() {
-    // If button is normal, transit to loading
-
-    // If button is loading, transit to normal
-
-    // If after 2sconds when button is loading, transit to transaction_received
-
-    // If after 2 seconds when button is transaction_received, transit to normal
     if (buttonState === "normal") {
-      buttonState = "loading";
-      // Make API call here to initiate the transaction
-      setTimeout(() => {
-        buttonState = "transaction_received";
-      }, 2000);
-    } else if (buttonState === "loading") {
-      buttonState = "normal";
-    } else if (buttonState === "transaction_received") {
-      buttonState = "normal";
+      scanStatus.set("scanning");
+    } else if (buttonState === "scanning") {
+      scanStatus.set("normal");
+    } else if (buttonState === "success") {
+      scanStatus.set("normal");
     }
   }
 
@@ -34,12 +30,12 @@
 <button on:click={handleClick}>
   {#if buttonState === "normal"}
     <button-text>Request</button-text>
-  {:else if buttonState === "loading"}
+  {:else if buttonState === "scanning"}
     <button-text>Requesting...(tap to cancel)</button-text>
     <button-loader>
       <Jumper color="#CAD2C5" />
     </button-loader>
-  {:else if buttonState === "transaction_received"}
+  {:else if buttonState === "success"}
     <button-text>Processing Payment...</button-text>
     <button-loader>
       <Jumper color="#ADFFEA" />
@@ -58,6 +54,7 @@
     justify-content: center;
     align-items: center;
     gap: 32px;
+    margin: 0px;
 
     height: 64px;
 
