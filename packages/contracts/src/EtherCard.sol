@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
+
 pragma solidity ^0.8.12;
 
 /* solhint-disable avoid-low-level-calls */
@@ -70,7 +71,7 @@ contract EtherCard is BaseAccount, Verifier {
      * @param userOp User Operation
      * @param proof ZK Proof
      */
-    function _validateSignature(UserOperation calldata userOp, Proof calldata proof)
+    function _validateProof(UserOperation calldata userOp, Proof calldata proof)
     internal returns (uint256 validationData) {
         return 0;
     }
