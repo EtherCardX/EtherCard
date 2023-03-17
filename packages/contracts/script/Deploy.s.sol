@@ -3,10 +3,12 @@ pragma solidity >=0.8.19;
 
 import {Script} from "forge-std/Script.sol";
 import {EtherCard} from "../src/EtherCard.sol";
+import {EntryPoint} from "../src/EntryPoint.sol";
 
 contract Deploy is Script {
     address internal deployer;
-    BaseAccount internal baseAccount;
+    EtherCard internal account;
+    EntryPoint internal entryPoint;
 
     function setUp() public virtual {
         (deployer,) = deriveRememberKey(vm.envString("MNEMONIC"), 0);
@@ -14,7 +16,8 @@ contract Deploy is Script {
 
     function run() public {
         vm.startBroadcast(deployer);
-        baseAccount = new EtherCard();
+        entryPoint = new EntryPoint();
+        account = new EtherCard(entryPoint);
         vm.stopBroadcast();
     }
 }

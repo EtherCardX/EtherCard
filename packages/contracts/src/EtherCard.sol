@@ -17,9 +17,6 @@ import "./Verifier.sol";
 contract EtherCard is BaseAccount, Verifier {
     using UserOperationLib for UserOperation;
 
-    //return value in case of signature failure, with no time-range.
-    // equivalent to _packValidationData(true,0,0);
-    uint256 constant internal SIG_VALIDATION_FAILED = 1;
 
     uint256 private _nonce;
     IEntryPoint private _entryPoint;
