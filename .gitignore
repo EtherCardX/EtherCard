@@ -39,6 +39,11 @@ broadcast
 # Docs
 docs/
 
+# Circuits
+packages/circuits/zkPv1/*
+
+!*.zok
+
 # env file
 .env
 .fishenv
