@@ -20,10 +20,12 @@ contract EtherCard is BaseAccount, Verifier {
 
 
     uint256 private _nonce;
+    address private _owner;
     IEntryPoint private _entryPoint;
 
     constructor(IEntryPoint __entryPoint) {
         _entryPoint = __entryPoint;
+        _owner = msg.sender;
     }
 
      /// @inheritdoc BaseAccount
@@ -34,6 +36,25 @@ contract EtherCard is BaseAccount, Verifier {
      /// @inheritdoc BaseAccount
     function entryPoint() public view override returns (IEntryPoint) {
         return _entryPoint;
+    }
+
+    /**
+     * @dev Require that the caller is the owner or the entryPoint.
+     */
+    function _requireFromEntryPointOrOwner() internal view {
+        require(msg.sender == address(entryPoint()) || msg.sender == _owner, "account: not Owner or EntryPoint");
+    }
+
+    /**
+     * @dev Set the entryPoint.
+     * @param receiver The address of the receiver
+     * @param value The amount of ether to transfer
+     * @param proof ZK Proof
+     */ 
+    function transferTo(address payable receiver, uint256 value, Proof calldata proof) external {
+        // _requireFromEntryPointOrOwner();
+        _validateProof(proof);
+        receiver.transfer(value);
     }
 
 
@@ -68,12 +89,13 @@ contract EtherCard is BaseAccount, Verifier {
 
     /**
      * @dev Validate zkProof to execute transaction
-     * @param userOp User Operation
      * @param proof ZK Proof
      */
-    function _validateProof(UserOperation calldata userOp, Proof calldata proof)
+    function _validateProof(Proof calldata proof)
     internal returns (uint256 validationData) {
-        return 0;
+        uint[] memory testInput;
+        testInput[0] = 1;
+        validationData = verify(testInput,proof);
     }
 
 
