@@ -41,7 +41,9 @@ docs/
 
 # Circuits
 packages/circuits/zkPv1/*
+!*.zok
 
+packages/hardhat/circuits/zkPv1/*
 !*.zok
 
 # env file

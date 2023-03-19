@@ -45,6 +45,15 @@ contract EtherCard is BaseAccount, Verifier {
         require(msg.sender == address(entryPoint()) || msg.sender == _owner, "account: not Owner or EntryPoint");
     }
 
+
+    /**
+     * @dev To deposit ETH
+     */ 
+    function deposit() external payable {
+        // _requireFromEntryPointOrOwner();
+        // _validateProof(proof);
+        // receiver.transfer(value);
+    }
     /**
      * @dev Set the entryPoint.
      * @param receiver The address of the receiver
@@ -53,7 +62,7 @@ contract EtherCard is BaseAccount, Verifier {
      */ 
     function transferTo(address payable receiver, uint256 value, Proof calldata proof) external {
         // _requireFromEntryPointOrOwner();
-        _validateProof(proof);
+        // _validateProof(proof);
         receiver.transfer(value);
     }
 
