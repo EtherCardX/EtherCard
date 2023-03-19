@@ -1,0 +1,23 @@
+node_modules
+.env
+coverage
+coverage.json
+typechain
+build
+generated
+#Hardhat files
+cache
+artifacts
+data
+./data/gemstone_requirements.csv
+deployments/localhost
+# Subgraph
+./subgraph/subgraphs/marketplace/generated
+./subgraph/subgraphs/marketplace/build
+./subgraph/subgraphs/atlantis/generated
+./subgraph/subgraphs/atlantis/build
+# Matchstick
+./subgraph/tests/.*
+subgraph.yaml
+
+.DS_Store
