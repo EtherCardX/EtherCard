@@ -20,7 +20,7 @@
 		"@sveltejs/kit": "^1.10.0",
 		"@typescript-eslint/eslint-plugin": "^5.54.1",
 		"@typescript-eslint/parser": "^5.54.1",
-		"@wagmi/cli": "^0.1.11",
+		"@wagmi/cli": "^0.1.13",
 		"abitype": "^0.6.7",
 		"eslint": "^8.35.0",
 		"eslint-config-prettier": "^8.7.0",
@@ -37,7 +37,7 @@
 	"dependencies": {
 		"@picocss/pico": "^1.5.7",
 		"@vitejs/plugin-basic-ssl": "^1.0.1",
-		"@wagmi/core": "0.10.1",
+		"@wagmi/core": "0.10.2",
 		"@web3modal/ethereum": "^2.2.0",
 		"@web3modal/html": "^2.2.0",
 		"ethers": "^5.7.2",

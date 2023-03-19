@@ -1,5 +1,6 @@
 {
-  "name": "scaling-ethereum-2023",
+  "name": "hardhat",
+  "private": true,
   "version": "1.0.0",
   "scripts": {
     "test": "mocha"
