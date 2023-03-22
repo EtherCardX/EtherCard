@@ -3,10 +3,10 @@ import 'dotenv/config';
 import { BigNumber, BigNumberish } from 'ethers';
 import { deployments, ethers } from 'hardhat';
 
-import { EntryPoint } from './../typechain/EntryPoint';
-import { EtherCard } from './../typechain/EtherCard';
+import { EntryPoint } from '../typechain/EntryPoint';
+import { EtherCard } from '../typechain/EtherCard';
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
-import { Verifier } from './../../../../playground/typechain/Verifier';
+import { Verifier } from '../../../../playground/typechain/Verifier';
 import { expect } from 'chai';
 
 let owner: SignerWithAddress;
@@ -80,7 +80,6 @@ describe('EtherCard', function () {
             '0x06921f0aa38875ceabef76e03a0c8ccb63908dc75e95a9a7a9285d2d09bb889a',
           ],
         },
-
         c: {
           X: '0x2d2959333a4d831a68304df8b842a9be4cebf5922eb726aa7251f511f1112437',
           Y: '0x238a76759606eafbbb0193bd27ebe559d0532510006a91b7934dfecaf6631239',
@@ -90,6 +89,37 @@ describe('EtherCard', function () {
       await etherCard.transferTo(user1.address, ethers.utils.parseEther('1'), proof);
 
       // Expect reciepient to receive 1 ETH
+      expect(await ethers.provider.getBalance(etherCard.address)).to.equal(ethers.utils.parseEther('1'));
+    });
+
+    it('Should revert transaction if invalid proof given', async function () {
+      expect(await ethers.provider.getBalance(etherCard.address)).to.equal(ethers.utils.parseEther('2'));
+
+      let proof: Verifier.ProofStruct = {
+        a: {
+          X: '0x0fe45bd30c499f0aa5cb67879b66df200b6805f578965ef193f6df852f211c1c',
+          Y: '0x22dbc00882591e7269fda8a277483e26b39369451b1e76ef23e18c14f1025e93',
+        },
+        b: {
+          X: [
+            '0x21fb3cabbf98991d2783219d5851300400c9057ef80be1c0482ad2f0bd30b946',
+            '0x27be7cc0f84fcdfe2722f77caad94940ac3d09ebe2935c1e7bb521eb08c6f8df',
+          ],
+          Y: [
+            '0x11a2b80b45ef08019bf2d163e89b36acbc96c05a9ef9d64768fa804cae5f37ad',
+            '0x06921f0aa38875ceabef76e03a0c8ccb63908dc75e95a9a7a9285d2d09bb889a',
+          ],
+        },
+        c: {
+          X: '0x2d2959333a4d831a68304df8b842a9be4cebf5922eb726aa7251f511f1112437',
+          Y: '0x0000000000000000000000000000000000000000000000000000000000000000',
+        },
+      };
+      // Execute transferTo
+      await etherCard.transferTo(user1.address, ethers.utils.parseEther('1'), proof);
+
+      // Expect reciepient to receive 1 ETH
+      await expect(await ethers.provider.getBalance(etherCard.address)).to.be.revertedWith('account: invalid proof');
     });
 
     // Should not execute transaction if invalid proof given

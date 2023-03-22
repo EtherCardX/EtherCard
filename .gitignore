@@ -43,7 +43,7 @@ docs/
 packages/circuits/zkPv1/*
 !*.zok
 
-packages/hardhat/circuits/zkPv1/*
+packages/contracts/circuits/zkPv1/*
 !*.zok
 
 # env file

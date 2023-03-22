@@ -8,7 +8,7 @@ pragma solidity ^0.8.12;
 
 import "./BaseAccount.sol";
 import "./Verifier.sol";
-
+import "hardhat/console.sol";
 
 /**
  * Basic account implementation.
@@ -45,15 +45,6 @@ contract EtherCard is BaseAccount, Verifier {
         require(msg.sender == address(entryPoint()) || msg.sender == _owner, "account: not Owner or EntryPoint");
     }
 
-
-    /**
-     * @dev To deposit ETH
-     */ 
-    function deposit() external payable {
-        // _requireFromEntryPointOrOwner();
-        // _validateProof(proof);
-        // receiver.transfer(value);
-    }
     /**
      * @dev Set the entryPoint.
      * @param receiver The address of the receiver
@@ -62,10 +53,16 @@ contract EtherCard is BaseAccount, Verifier {
      */ 
     function transferTo(address payable receiver, uint256 value, Proof calldata proof) external {
         // _requireFromEntryPointOrOwner();
-        // _validateProof(proof);
+        _validateProof(proof);
         receiver.transfer(value);
     }
 
+
+    /**
+     * @notice Deposit ETH to the contract
+     */
+    function deposit() external payable {
+    }
 
     /**
      * Validate user's signature and nonce.
@@ -82,7 +79,7 @@ contract EtherCard is BaseAccount, Verifier {
     }
 
     /**
-     * ensure the request comes from the known entrypoint.
+     * ensure the request comes from thes known entrypoint.
      */
     function _requireFromEntryPoint() internal override view {
         require(msg.sender == address(entryPoint()), "account: not from EntryPoint");
@@ -100,11 +97,13 @@ contract EtherCard is BaseAccount, Verifier {
      * @dev Validate zkProof to execute transaction
      * @param proof ZK Proof
      */
-    function _validateProof(Proof calldata proof)
+    function _validateProof(Proof calldata proof) view
     internal returns (uint256 validationData) {
         uint[] memory testInput;
-        testInput[0] = 1;
         validationData = verify(testInput,proof);
+        console.log(validationData);
+        require(validationData == 0, "account: invalid proof");
+
     }
 
 

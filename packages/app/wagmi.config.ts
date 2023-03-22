@@ -11,23 +11,7 @@ const chains = { ...wagmiChains, base, taiko };
 
 export default defineConfig({
   out: "src/generated.ts",
-  contracts: [
-    {
-      name: "SignalService",
-      abi: signalServiceABI as Abi,
-      address: {
-        [chains.sepolia.id]: "0xe40D5bedD2f3d9F288CC12c69463bC43c77488d6",
-        [chains.taiko.id]: "0x191E3D5a00d54799D7da6c04d56b19938304c312",
-      },
-    },
-    {
-      name: "TaikoL2",
-      abi: headerSyncABI as Abi, // only using headerSyncABI for now
-      address: {
-        [chains.taiko.id]: "0x0000777700000000000000000000000000000001",
-      },
-    },
-  ],
+  contracts: [],
   plugins: [
     hardhat({
       project: "../hardhat",
