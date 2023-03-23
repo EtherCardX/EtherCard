@@ -9,7 +9,6 @@
     type FetchBalanceResult,
     getProvider,
   } from "@wagmi/core";
-  import { fooABI, fooAddress } from "../generated";
   import { foundry } from "@wagmi/core/chains";
   import { onMount } from "svelte";
   import { ethers, Wallet, type BigNumber } from "ethers";

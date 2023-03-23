@@ -1,7 +1,7 @@
 <script lang="ts">
   import BottomNav from "../components/BottomNav/BottomNav.svelte";
   import "@picocss/pico/css/pico.min.css";
-  import { taiko } from "../domain/chain";
+  import { taiko, gnosis, mumbai, scroll_testnet } from "../domain/chain";
   import { ethereumClient, wagmiClient, web3Modal, providers } from "../stores";
   import { configureChains, createClient } from "@wagmi/core";
   import { sepolia, foundry } from "@wagmi/core/chains";
@@ -18,9 +18,14 @@
     [sepolia.id]: new ethers.providers.JsonRpcProvider("https://rpc.sepolia.org"),
     [taiko.id]: new ethers.providers.JsonRpcProvider("https://l2rpc.hackathon.taiko.xyz"),
     [foundry.id]: new ethers.providers.JsonRpcProvider("http://localhost:8545"),
+    [gnosis.id]: new ethers.providers.JsonRpcProvider(gnosis.rpcUrls.default.http[0]),
+    [mumbai.id]: new ethers.providers.JsonRpcProvider(mumbai.rpcUrls.default.http[0]),
+    [scroll_testnet.id]: new ethers.providers.JsonRpcProvider(
+      scroll_testnet.rpcUrls.default.http[0]
+    ),
   };
   const { chains, provider } = configureChains(
-    [sepolia, taiko, foundry],
+    [sepolia, taiko, foundry, gnosis, mumbai, scroll_testnet],
     [
       jsonRpcProvider({
         rpc: (chain) => ({ http: $providers[chain.id].connection.url }),
