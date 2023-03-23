@@ -1,8 +1,9 @@
 import '@nomicfoundation/hardhat-toolbox';
-import '@nomiclabs/hardhat-ethers'
+import '@nomiclabs/hardhat-ethers';
 import 'hardhat-deploy';
 import 'dotenv/config';
 
+import { MNEMONIC } from './../app/.svelte-kit/ambient.d';
 import { ethers } from 'ethers';
 // import ethers from 'ethers'
 import { task } from 'hardhat/config';
@@ -22,6 +23,9 @@ task('new:wallet', 'Generate New Wallet', async (taskArgs, hre) => {
   console.log('PK: ', wallet._signingKey().privateKey);
   console.log('Address: ', wallet.address);
 });
+
+let ACCOUNT;
+let useMnemonic = true;
 
 // Setup Default Values
 let PRIVATE_KEY;
@@ -48,6 +52,14 @@ if (!process.env.ETHERSCAN_API_KEY) {
   console.log('⚠️ Please set ETHERSCAN_API_KEY in the .env file');
 }
 
+if (useMnemonic) {
+  ACCOUNT = {
+    mnemonic: process.env.MNEMONIC,
+  };
+} else {
+  ACCOUNT = [PRIVATE_KEY];
+}
+
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
@@ -57,6 +69,7 @@ module.exports = {
     localhost: {
       url: 'http://0.0.0.0:8545',
       saveDeployments: true,
+      accounts: ACCOUNT,
       // accounts: [PRIVATE_KEY],
     },
     hardhat: {
@@ -69,70 +82,113 @@ module.exports = {
       mining: {
         auto: true,
       },
+      accounts: ACCOUNT,
     },
     mainnet: {
       url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
       chainId: 1,
-      accounts: [PRIVATE_KEY],
+      accounts: ACCOUNT,
       saveDeployments: true,
     },
     rinkeby: {
       url: `https://rinkeby.infura.io/v3/${process.env.INFURA_API_KEY}`,
       chainId: 4,
-      accounts: [PRIVATE_KEY],
+      accounts: ACCOUNT,
       saveDeployments: true,
     },
     goerli: {
-      url: `https://goerli.infura.io/v3/${process.env.INFURA_API_KEY}`,
+      url: `https://rpc.ankr.com/eth_goerli`,
       chainId: 5,
-      accounts: [PRIVATE_KEY_TESTNET],
+      accounts: ACCOUNT,
       saveDeployments: true,
     },
     matic: {
       url: 'https://polygon-rpc.com/',
       chainId: 137,
-      accounts: [PRIVATE_KEY],
+      accounts: ACCOUNT,
     },
     mumbai: {
-      url: 'https://rpc-mumbai.matic.today',
+      url: 'https://matic-mumbai.chainstacklabs.com',
       chainId: 80001,
-      accounts: [PRIVATE_KEY],
+      accounts: ACCOUNT,
       saveDeployments: true,
     },
     optimism_mainnet: {
       url: 'https://mainnet.optimism.io',
       chainId: 10,
-      accounts: [PRIVATE_KEY],
+      accounts: ACCOUNT,
       saveDeployments: true,
     },
     optimism_testnet: {
-      url: 'https://kovan.optimism.io',
-      chainId: 69,
-      accounts: [PRIVATE_KEY],
+      url: 'https://goerli.optimism.io',
+      chainId: 420,
+      accounts: ACCOUNT,
       saveDeployments: true,
     },
     arbitrum_mainnet: {
       url: 'https://arb1.arbitrum.io/rpc',
       chainId: 42161,
-      accounts: [PRIVATE_KEY],
+      accounts: ACCOUNT,
       saveDeployments: true,
     },
     arbitrum_testnet: {
       url: 'https://rinkeby.arbitrum.io/rpc',
       chainId: 421611,
-      accounts: [PRIVATE_KEY],
+      accounts: ACCOUNT,
       saveDeployments: true,
     },
     cronos_testnet: {
       url: `https://evm-t3.cronos.org`,
       chainId: 338,
-      accounts: [PRIVATE_KEY_TESTNET],
+      accounts: ACCOUNT,
     },
     cronos_mainnet: {
       url: `https://mainnet.cronoslabs.com/v1/55e37d8975113ae7a44603ef8ce460aa/`,
       chainId: 25,
-      accounts: [PRIVATE_KEY],
+      accounts: ACCOUNT,
       gasLimit: 1000000000000,
+    },
+    scroll_testnet: {
+      url: 'https://alpha-rpc.scroll.io/l2',
+      chainId: 534353,
+      accounts: ACCOUNT,
+      saveDeployments: true,
+    },
+    metis_testnet: {
+      url: 'https://goerli.gateway.metisdevops.link',
+      chainId: 599,
+      accounts: ACCOUNT,
+      saveDeployments: true,
+    },
+    base_testnet: {
+      url: 'https://goerli.base.org',
+      chainId: 84531,
+      accounts: ACCOUNT,
+      saveDeployments: true,
+    },
+    mantle_testnet: {
+      url: 'https://rpc.testnet.mantle.xyz',
+      chainId: 5001,
+      accounts: ACCOUNT,
+      saveDeployments: true,
+    },
+    taiko_testnet: {
+      url: 'https://rpc.a2.taiko.xyz',
+      chainId: 167002,
+      accounts: ACCOUNT,
+      saveDeployments: true,
+    },
+    gnosis: {
+      url: 'https://rpc.gnosischain.com/',
+      chainId: 100,
+      accounts: ACCOUNT,
+      saveDeployments: true,
+    },
+    gnosis_testnet: {
+      url: 'https://rpc.chiadochain.net',
+      chainId: 10200,
+      accounts: ACCOUNT,
+      saveDeployments: true,
     },
   },
   solidity: {

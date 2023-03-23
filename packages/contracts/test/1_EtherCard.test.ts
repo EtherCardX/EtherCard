@@ -112,16 +112,13 @@ describe('EtherCard', function () {
         },
         c: {
           X: '0x2d2959333a4d831a68304df8b842a9be4cebf5922eb726aa7251f511f1112437',
-          Y: '0x0000000000000000000000000000000000000000000000000000000000000000',
+          Y: '0x238a76759606eafbbb0193bd27ebe559d0532510006a91b7934dfecaf6631238',
         },
       };
       // Execute transferTo
-      await etherCard.transferTo(user1.address, ethers.utils.parseEther('1'), proof);
-
-      // Expect reciepient to receive 1 ETH
-      await expect(await ethers.provider.getBalance(etherCard.address)).to.be.revertedWith('account: invalid proof');
+      await expect(etherCard.transferTo(user1.address, ethers.utils.parseEther('1'), proof)).to.be.revertedWith(
+        'account: invalid proof'
+      );
     });
-
-    // Should not execute transaction if invalid proof given
   });
 });
