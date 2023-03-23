@@ -1,7 +1,4 @@
 {
-  "name": "dapp-slaps",
-  "version": "0.1.0",
-  "scripts": {
-    "start": "forge"
-  }
+  "name": "ethercard",
+  "version": "1.0.0"
 }

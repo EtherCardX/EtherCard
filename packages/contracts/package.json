@@ -3,7 +3,13 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "deploy": "hardhat deploy --network localhost",
+    "deploy:scroll_testnet": "hardhat deploy --network scroll_testnet",
+    "deploy:mumbai": "hardhat deploy --network mumbai",
+    "deploy:optimism_testnet": "hardhat deploy --network optimism_testnet",
+    "deploy:taiko_testnet": "hardhat deploy --network taiko_testnet",
+    "deploy:gnosis_testnet": "hardhat deploy --network gnosis_testnet"
   },
   "author": "2manslkh",
   "license": "ISC",

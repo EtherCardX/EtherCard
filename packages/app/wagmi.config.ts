@@ -14,7 +14,7 @@ export default defineConfig({
   contracts: [],
   plugins: [
     hardhat({
-      project: "../hardhat",
+      project: "../contracts",
     }),
   ],
 });
