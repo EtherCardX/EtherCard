@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { BigNumber } from "ethers";
-  import caretIcon from "../../images/caret-down.svg";
-  import doubleCheck from "../../images/double-check.svg";
+  import caretIcon from "../../public/images/caret-down.svg";
+  import doubleCheck from "../../public/images/double-check.svg";
   // your script goes here
   import { formatEther, parseEther } from "ethers/lib/utils.js";
 
@@ -47,17 +47,16 @@
     flex-direction: column;
     align-items: flex-start;
     padding: 8px;
-    gap: 3px;
 
     position: relative;
     width: 100%;
     height: 54px;
     margin: 0px;
 
-    background: #354f52;
+    /* background: #354f52; */
     border-width: 0px 0px 1px 0px;
     border-style: solid;
-    border-color: #ffffff;
+    border-color: #b7adad;
   }
 
   transaction-header {
@@ -75,17 +74,15 @@
     align-self: stretch;
     flex-grow: 0;
 
-    font-family: "Inter";
     font-style: normal;
     font-weight: 700;
     font-size: 8px;
     line-height: 10px;
     /* identical to box height */
+    color: #007c32;
 
     display: flex;
     align-items: center;
-
-    color: #ffffff;
   }
 
   transaction-body {
@@ -105,15 +102,12 @@
     flex-direction: row;
     justify-content: space-between;
 
-    font-family: "Inter";
     font-style: normal;
-    font-weight: 700;
+    font-weight: 500;
     font-size: 16px;
     line-height: 19px;
     display: flex;
     align-items: center;
-
-    color: #ffffff;
 
     /* Inside auto layout */
 
@@ -132,12 +126,9 @@
     gap: 4px;
   }
   transaction-timestamp {
-    font-family: "Inter";
     font-style: normal;
     font-weight: 700;
     font-size: 8px;
     line-height: 10px;
-
-    color: #ffffff;
   }
 </style>

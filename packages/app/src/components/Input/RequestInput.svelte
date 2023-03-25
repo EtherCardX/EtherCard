@@ -22,24 +22,30 @@
     /* auto arrange */
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 4px;
   }
   title {
-    font-family: "Inter";
     font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 16px;
     display: flex;
     align-items: center;
 
-    color: #ffffff;
+    color: #000000;
   }
   input {
     width: 100%;
     height: 64px;
     background: #ffffff;
-    border: 1px solid #2f3e46;
+    border: 1px solid #b7adad;
     border-radius: 8px;
+
+    /* text */
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    /* identical to box height */
+
     color: #000000;
   }
 </style>

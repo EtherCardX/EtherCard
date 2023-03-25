@@ -31,14 +31,14 @@
   {#if buttonState === "normal"}
     <button-text>Request</button-text>
   {:else if buttonState === "scanning"}
-    <button-text>Requesting...(tap to cancel)</button-text>
+    <button-text-small>Requesting...(tap to cancel)</button-text-small>
     <button-loader>
-      <Jumper color="#CAD2C5" />
+      <Jumper color="#FFFFFF" />
     </button-loader>
   {:else if buttonState === "success"}
-    <button-text>Processing Payment...</button-text>
+    <button-text-small>Processing Payment...</button-text-small>
     <button-loader>
-      <Jumper color="#ADFFEA" />
+      <Jumper color="#FFFFFF" />
     </button-loader>
   {/if}
 </button>
@@ -58,7 +58,8 @@
 
     height: 64px;
 
-    background: #84a98c;
+    background: linear-gradient(100.32deg, #92aaff 22.58%, #7237bd 88.81%);
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
   }
   button-text {
@@ -66,10 +67,31 @@
 
     height: 24px;
 
-    font-family: "Inter";
     font-style: normal;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 24px;
+    line-height: 24px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+
+    color: #ffffff;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+  }
+  button-text-small {
+    /* Request */
+
+    height: 24px;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16;
     line-height: 24px;
     /* identical to box height */
 

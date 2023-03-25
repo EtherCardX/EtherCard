@@ -2,6 +2,10 @@
   import CardsNavItem from "./Item/CardsNavItem.svelte";
   import RequestNavItem from "./Item/RequestNavItem.svelte";
 
+  import receive from "../../public/images/request-active.svg";
+  import receiveInactive from "../../public/images/request-inactive.svg";
+  import card from "../../public/images/card-active.svg";
+  import cardInactive from "../../public/images/card-inactive.svg";
   // variables
   export let activeTab: "receive" | "cards" = "receive";
 
@@ -16,9 +20,12 @@
       class={activeTab === "receive" ? "active" : ""}
       on:click={() => setActiveTab("receive")}
     >
+      <img src={activeTab === "receive" ? receive : receiveInactive} alt="card" />
+
       Receive
     </button>
     <button class={activeTab === "cards" ? "active" : ""} on:click={() => setActiveTab("cards")}>
+      <img src={activeTab === "cards" ? card : cardInactive} alt="card" />
       Cards
     </button>
   </nav>
@@ -46,24 +53,29 @@
   }
 
   button {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
     width: 100%;
     font-size: 16px;
-    color: #fff;
+    color: #aeaeae;
     border: none;
     border-radius: 0px;
-    background: #2f3e46;
     background-color: transparent;
     cursor: pointer;
     margin: 0;
+    box-shadow: none;
   }
 
   button.active {
     width: 100%;
-    color: #fff;
+    color: #7338be;
     border: none;
     border-radius: 0px;
 
-    background: #455c68;
+    background: #eaeeff;
     font-weight: bold;
+    box-shadow: none;
   }
 </style>

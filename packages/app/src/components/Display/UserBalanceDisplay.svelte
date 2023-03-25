@@ -19,60 +19,45 @@
     flex-direction: column;
     align-items: flex-start;
     padding: 16px;
-    gap: 24px;
+    /* gap: 24px; */
 
     width: 100%;
 
-    background: #ffffff;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 16px;
+    background: #f3f3f3;
+    border-radius: 8px;
+    /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
   }
 
   balance-title {
     /* Balance */
 
     width: auto;
-    height: 44px;
 
-    font-family: "Inter";
     font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 29px;
+    font-weight: 650;
+    font-size: 16px;
+    line-height: 19px;
     display: flex;
     align-items: center;
+    /* letter-spacing: -0.02em; */
 
     color: #000000;
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
   }
 
   balance-amount {
     /* 0.00 ETH */
 
     width: auto;
-    height: 39px;
 
-    font-family: "Inter";
     font-style: normal;
     font-weight: 700;
-    font-size: 32px;
-    line-height: 39px;
+    font-size: 24px;
+    line-height: 29px;
     /* identical to box height */
 
     display: flex;
     align-items: center;
 
     color: #000000;
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 1;
-    flex-grow: 0;
   }
 </style>

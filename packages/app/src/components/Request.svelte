@@ -26,12 +26,12 @@
   let receiverETH: string;
   let inputAmount: number = 0;
   let audio: any;
-  let items: Array<{ timestamp: string; amount: BigNumber }>;
-  // let items: Array<{ timestamp: string; amount: BigNumber }> = [
-  //   { timestamp: "1678953370", amount: parseEther("0.1") },
-  //   { timestamp: "1678943370", amount: parseEther("0.1") },
-  //   { timestamp: "1678933370", amount: parseEther("0.1") },
-  // ];
+  // let items: Array<{ timestamp: string; amount: BigNumber }>;
+  let items: Array<{ timestamp: string; amount: BigNumber }> = [
+    { timestamp: "1678953370", amount: parseEther("0.1") },
+    { timestamp: "1678943370", amount: parseEther("0.1") },
+    { timestamp: "1678933370", amount: parseEther("0.1") },
+  ];
 
   const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 
@@ -61,13 +61,10 @@
     }
   });
 
-  transactions.subscribe((value) => {
-    items = value;
-  });
+  // transactions.subscribe((value) => {
+  //   items = value;
+  // });
 
-  // Get
-
-  // functions
   async function startScanning() {
     try {
       //@ts-ignore
@@ -171,7 +168,6 @@
   }
 
   transaction-title {
-    font-family: "Inter";
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
@@ -179,8 +175,10 @@
     align-items: center;
 
     margin-top: 16px;
-
-    color: #ffffff;
+    width: 100%;
+    border-width: 0px 0px 1px 0px;
+    border-style: solid;
+    border-color: #b7adad;
   }
   transaction-container {
     /* Transaction Container */
