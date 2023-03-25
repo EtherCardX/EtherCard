@@ -33,10 +33,8 @@ function readDeployments() {
         ...out[file.split(".")[0]],
         [chainId]: json.address,
       };
-      console.log(out);
     });
   });
-  console.log(out);
   return out;
 }
 
