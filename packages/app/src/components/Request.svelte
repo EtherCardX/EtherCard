@@ -155,6 +155,7 @@
         "reading",
         //@ts-ignore
         async ({ message, serialNumber }) => {
+          console.log("🚀 | message:", message);
           let records = message.records;
           console.log("🚀 | records:", records);
           records = records.filter((record: any) => {
