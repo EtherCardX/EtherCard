@@ -43,6 +43,18 @@ tF
 // Concatenate all elements in proof.a, proof.b, and proof.c
 const concatenatedProof = jsonObject.proof.a.concat(jsonObject.proof.b.flat(), jsonObject.proof.c).join('');
 
+// Reverse the concatenation process
+function expandProof(concatenatedProof) {
+  return {
+    a: { X: '0x' + concatenatedProof.slice(0, 64), Y: '0x' + concatenatedProof.slice(64, 128) },
+    b: {
+      X: ['0x' + concatenatedProof.slice(128, 192), '0x' + concatenatedProof.slice(192, 256)],
+      Y: ['0x' + concatenatedProof.slice(256, 320), '0x' + concatenatedProof.slice(320, 384)],
+    },
+    c: { X: '0x' + concatenatedProof.slice(384, 448), Y: '0x' + concatenatedProof.slice(448, 512) },
+  };
+}
+
 // Remove all "0x" from the result
 let result = concatenatedProof.replace(/0x/g, '');
 result = result.toString();
@@ -66,13 +78,23 @@ fs.writeFileSync('gzipped.txt', base64compressed);
 console.log('Gzipped size:', fs.statSync('gzipped.txt').size);
 
 // Decode the Base64 string to a string
-const str = atob(base64compressed);
-
-// Convert the string to an array of uint8
-const bytes = new Uint8Array(str.length);
-for (let i = 0; i < str.length; ++i) {
-  bytes[i] = str.charCodeAt(i);
-}
-
-const decompressed = pako.inflate(bytes, { to: 'string' });
+const decompressed = decompressGZIP(base64compressed);
+console.log('🚀 | decompressed:', decompressed);
 console.log(decompressed === result);
+
+// Write decompressed to file (decompressed.txt) using writeFileSync
+const decompressedExpanded = expandProof(decompressed);
+console.log('🚀 | decompressedExpanded:', decompressedExpanded);
+function decompressGZIP(base64compressed) {
+  const str = atob(base64compressed);
+
+  // Convert the string to an array of uint8
+  const bytes = new Uint8Array(str.length);
+  for (let i = 0; i < str.length; ++i) {
+    bytes[i] = str.charCodeAt(i);
+  }
+  console.log('🚀 | bytes:', bytes);
+
+  const decompressed = pako.inflate(bytes, { to: 'string' });
+  return decompressed;
+}

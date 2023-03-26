@@ -12,7 +12,7 @@
   let displayAmount = formatEther(amount);
 
   // Convert timestamp to HH:MM
-  let displayTimestamp = new Date(Number(timestamp) * 1000);
+  let displayTimestamp = new Date(Number(timestamp));
   let _displayTimestamp = displayTimestamp
     .toLocaleTimeString("en-US", {
       hour: "numeric",

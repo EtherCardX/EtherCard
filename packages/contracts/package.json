@@ -5,7 +5,7 @@
   "scripts": {
     "test": "mocha",
     "deploy": "hardhat deploy --network localhost",
-    "deploy:scroll_testnet": "hardhat deploy --network scroll_testnet",
+    "deploy:scroll_testnet": "hardhat deploy --network scroll_testnet --tags EtherCard",
     "deploy:mumbai": "hardhat deploy --network mumbai",
     "deploy:optimism_testnet": "hardhat deploy --network optimism_testnet",
     "deploy:taiko_testnet": "hardhat deploy --network taiko_testnet",

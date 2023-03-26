@@ -10,6 +10,7 @@ importers:
       '@picocss/pico': ^1.5.7
       '@sveltejs/adapter-auto': ^2.0.0
       '@sveltejs/kit': ^1.10.0
+      '@types/pako': ^2.0.0
       '@typescript-eslint/eslint-plugin': ^5.54.1
       '@typescript-eslint/parser': ^5.54.1
       '@vitejs/plugin-basic-ssl': ^1.0.1
@@ -22,6 +23,7 @@ importers:
       eslint-config-prettier: ^8.7.0
       eslint-plugin-svelte3: ^4.0.0
       ethers: ^5.7.2
+      pako: ^2.1.0
       prettier: ^2.8.4
       prettier-plugin-svelte: ^2.9.0
       svelte: ^3.55.1
@@ -33,11 +35,13 @@ importers:
       vite-plugin-node-polyfills: ^0.7.0
     dependencies:
       '@picocss/pico': 1.5.7
+      '@types/pako': 2.0.0
       '@vitejs/plugin-basic-ssl': 1.0.1_vite@4.2.0
       '@wagmi/core': 0.10.2_6la3wgdurc2byppalgze7lq2hy
       '@web3modal/ethereum': 2.2.1_liy2hs5662dglhrtkiqy7nhfda
       '@web3modal/html': 2.2.1
       ethers: 5.7.2
+      pako: 2.1.0
       svelte-loading-spinners: 0.3.4
     devDependencies:
       '@sveltejs/adapter-auto': 2.0.0_@sveltejs+kit@1.12.0
@@ -2327,6 +2331,10 @@ packages:
 
   /@types/node/8.10.66:
     resolution: {integrity: sha512-tktOkFUA4kXx2hhhrB8bIFb5TbwzS4uOhKEmwiD+NoiL0qtP2OQ9mFldbgD4dV1djrlBYP6eBuQZiWjuHUpqFw==}
+    dev: false
+
+  /@types/pako/2.0.0:
+    resolution: {integrity: sha512-10+iaz93qR5WYxTo+PMifD5TSxiOtdRaxBf7INGGXMQgTCu8Z/7GYWYFUOS3q/G0nE5boj1r4FEB+WSy7s5gbA==}
     dev: false
 
   /@types/parse-json/4.0.0:

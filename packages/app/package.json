@@ -36,11 +36,13 @@
 	},
 	"dependencies": {
 		"@picocss/pico": "^1.5.7",
+		"@types/pako": "^2.0.0",
 		"@vitejs/plugin-basic-ssl": "^1.0.1",
 		"@wagmi/core": "0.10.2",
 		"@web3modal/ethereum": "^2.2.0",
 		"@web3modal/html": "^2.2.0",
 		"ethers": "^5.7.2",
+		"pako": "^2.1.0",
 		"svelte-loading-spinners": "^0.3.4"
 	}
 }
