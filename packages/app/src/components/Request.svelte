@@ -159,7 +159,7 @@
           let records = message.records;
           console.log("🚀 | records:", records);
           records = records.filter((record: any) => {
-            return record.mediaType === "text/plain";
+            return record.mediaType === "application/json";
           });
           const textDecoder = new TextDecoder();
           const text = textDecoder.decode(records[0].data);

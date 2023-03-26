@@ -174,7 +174,7 @@ module.exports = {
     },
     taiko_testnet: {
       url: 'https://rpc.a2.taiko.xyz',
-      chainId: 167002,
+      chainId: 167004,
       accounts: ACCOUNT,
       saveDeployments: true,
     },
@@ -183,6 +183,7 @@ module.exports = {
       chainId: 100,
       accounts: ACCOUNT,
       saveDeployments: true,
+      gasPrice: 3000000000,
     },
     gnosis_testnet: {
       url: 'https://rpc.chiadochain.net',

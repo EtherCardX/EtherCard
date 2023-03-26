@@ -9,7 +9,7 @@
     "deploy:mumbai": "hardhat deploy --network mumbai",
     "deploy:optimism_testnet": "hardhat deploy --network optimism_testnet",
     "deploy:taiko_testnet": "hardhat deploy --network taiko_testnet",
-    "deploy:gnosis_testnet": "hardhat deploy --network gnosis_testnet"
+    "deploy:gnosis": "hardhat deploy --network gnosis"
   },
   "author": "2manslkh",
   "license": "ISC",
