@@ -156,8 +156,9 @@
         //@ts-ignore
         async ({ message, serialNumber }) => {
           let records = message.records;
+          console.log("🚀 | records:", records);
           records = records.filter((record: any) => {
-            return record.mediaType === "application/json";
+            return record.mediaType === "text/plain";
           });
           const textDecoder = new TextDecoder();
           const text = textDecoder.decode(records[0].data);
