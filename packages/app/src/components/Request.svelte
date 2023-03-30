@@ -44,7 +44,6 @@
   onMount(async () => {
     let { address } = getAccount();
     receiverAddress = address ? address : ZERO_ADDRESS;
-    console.log("🚀 | onMount | receiverAddress: ", receiverAddress);
     receiverETH = formatEther((await fetchBalance({ address: receiverAddress })).value);
     userETH.set(receiverETH);
   });
@@ -160,9 +159,7 @@
         "reading",
         //@ts-ignore
         async ({ message, serialNumber }) => {
-          console.log("🚀 | message:", message);
           let records = message.records;
-          console.log("🚀 | records:", records);
           records = records.filter((record: any) => {
             return record.mediaType === "application/json";
           });
@@ -184,13 +181,13 @@
 
     let proof = ungzipProof(_proof);
     let expandedProof = expandProof(proof);
-    console.log("🚀 | sendTransaction | proof:", proof);
+    console.log("Compressed ZK Proof:", proof);
 
     let tx;
     try {
-      console.log("senderAddress:", wallet.address);
-      console.log("receiverAddress:", receiverAddress);
-      console.log("value:", inputAmount.toString());
+      console.log("Sender Address:", wallet.address);
+      console.log("Receiver Address:", receiverAddress);
+      console.log("Value:", inputAmount.toString());
 
       let contract = new ethers.Contract(etherCardAddress[scroll_testnet.id], etherCardABI, wallet);
 
@@ -199,7 +196,6 @@
         ethers.utils.parseEther(inputAmount.toString()),
         expandedProof
       );
-      console.log(tx);
     } catch (error) {
       console.log("error: ", error);
     }
