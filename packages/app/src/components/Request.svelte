@@ -17,13 +17,13 @@
   import RequestInput from "./Input/RequestInput.svelte";
   import RequestButton from "./Button/RequestButton.svelte";
   import TransactionLine from "./Transaction/TransactionLine.svelte";
-  import { amount, scanStatus } from "../stores";
-  import { userETH, transactions } from "../stores";
+  import { amount, scanStatus, modalState, userETH, transactions } from "../stores";
   import { etherCardABI, etherCardAddress } from "../generated";
   import pako from "pako";
 
   import kaching from "../audio/kaching.mp3";
   import { scroll_testnet } from "../domain/chain";
+  import SuccessModal from "./Modal/SuccessModal.svelte";
   // variables
   let receiverAddress: `0x${string}`;
   let receiverETH: string;
@@ -31,7 +31,8 @@
   let audio: any;
   let PAYMASTER = import.meta.env.VITE_PAYMASTER;
   let _scanStatus: string;
-  let items: Array<{ timestamp: string; amount: BigNumber }>;
+  let items: Array<{ timestamp: string; amount: BigNumber; txHash: string }>;
+  let successModal: boolean = false;
   // let items: Array<{ timestamp: string; amount: BigNumber }> = [
   //   { timestamp: "1678953370", amount: parseEther("0.1") },
   //   { timestamp: "1679943370", amount: parseEther("0.2") },
@@ -51,6 +52,10 @@
   function loadWallet(pk: string): Wallet {
     return new ethers.Wallet(pk, getProvider());
   }
+
+  modalState.subscribe((value) => {
+    successModal = value;
+  });
   interface Proof {
     a: { X: BigNumber; Y: BigNumber };
     b: { X: [BigNumber, BigNumber]; Y: [BigNumber, BigNumber] };
@@ -210,8 +215,10 @@
         items.push({
           timestamp: Date.now().toString(),
           amount: parseEther(inputAmount.toString()),
+          txHash: tx.hash,
         });
         transactions.set(items);
+        modalState.set(true);
         audio.play();
       } catch (error) {
         console.log("tx error: ", error);
@@ -232,6 +239,10 @@
 <audio src={kaching} bind:this={audio} />
 
 <section>
+  {#if successModal}
+    <SuccessModal balance={receiverETH} latestItem={items[0]} />
+  {/if}
+
   <container>
     <UserBalanceDisplay amount={receiverETH} />
     <RequestInput />

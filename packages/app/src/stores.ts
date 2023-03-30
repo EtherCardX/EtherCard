@@ -14,4 +14,7 @@ export const amount = writable(0);
 export const isScanning = writable(false);
 export const scanStatus = writable("normal"); // normal, scanning, success
 export const userETH = writable("");
-export const transactions = writable<{ timestamp: string; amount: BigNumber }[]>([]);
+export const transactions = writable<{ timestamp: string; amount: BigNumber; txHash: string }[]>(
+  []
+);
+export const modalState = writable(true);

@@ -11,6 +11,7 @@
   import { jsonRpcProvider } from "@wagmi/core/providers/jsonRpc";
 
   import circleProfile from "../public/images/circle-profile.svg";
+  import SuccessModal from "../components/Modal/SuccessModal.svelte";
 
   const projectId = import.meta.env.VITE_WEB3MODAL_PROJECT_ID;
   let modalOpen = false;
